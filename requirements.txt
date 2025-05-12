@@ -1,0 +1,16 @@
+opencv-python-headless
+albumentations
+matplotlib
+simplejson
+numpy
+opencv_python
+photutils
+scipy
+torch
+pyquaternion
+tqdm
+pyrr
+# Pillow
+torchvision
+PyYAML
+tensorboardX

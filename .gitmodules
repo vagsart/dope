@@ -1,0 +1,3 @@
+[submodule "dope"]
+	path = dope
+	url = https://github.com/NVlabs/Deep_Object_Pose.git

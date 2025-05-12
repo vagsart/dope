@@ -1,0 +1,36 @@
+FROM ubuntu:20.04
+
+# Copyright (c) 2020, NVIDIA CORPORATION. All rights reserved.
+# Full license terms provided in LICENSE.md file.
+# To build:
+# docker build -t nvidia-dope:noetic-v1 -f Dockerfile.noetic ..
+
+ENV HOME /root
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system and development components
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    apt-utils \
+    software-properties-common \
+    build-essential \
+    cmake \
+    git \
+    python3-pip \
+    libxext6 \
+    libx11-6 \
+    libglvnd0 \
+    libgl1 \
+    libglx0 \
+    libegl1 \
+    freeglut3-dev \
+    && apt-get -y autoremove \
+    && apt-get clean
+
+
+# pip install required Python packages
+COPY requirements.txt /
+RUN pip3 install -r /requirements.txt
+
+
+
+
