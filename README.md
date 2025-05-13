@@ -71,3 +71,6 @@ python utils/results_to_bop.py \
   --outf results/ \
   --modelpath /home/vagsart/Datasets/IndustryShapes/models_eval
 ```
+
+(Optional) If you want to visualize the results, add `--visualize` flag to the command above.
+```bash
