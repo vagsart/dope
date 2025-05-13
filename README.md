@@ -49,10 +49,6 @@ If you want to check training process in tensorboard:
 tensorboard --logdir=data/training_log/runs --port=6006 --host=localhost
 ```
 
-If raise error change `Deep_Object_Pose/train2/train.py:140` to:
-```python
-parser.add_argument("--local-rank", type=int)
-```
 
 ### Running inference
 
