@@ -1,0 +1,86 @@
+diff --git a/common/cuboid.py b/common/cuboid.py
+index d819bea..f71e489 100644
+--- a/common/cuboid.py
++++ b/common/cuboid.py
+@@ -84,23 +84,23 @@ class Cuboid3d():
+             right = cx + width / 2.0
+             left = cx - width / 2.0
+             # Y axis point downward
+-            top = cy - height / 2.0
+-            bottom = cy + height / 2.0
++            top = cy + height / 2.0
++            bottom = cy - height / 2.0
+             # Z axis point forward
+             front = cz + depth / 2.0
+             rear = cz - depth / 2.0
+ 
+             # List of 8 vertices of the box       
+             self._vertices = [
+-                [right, top, front],    # Front Top Right
+-                [left, top, front],     # Front Top Left
+-                [left, bottom, front],  # Front Bottom Left
+-                [right, bottom, front], # Front Bottom Right
+-                [right, top, rear],     # Rear Top Right
+-                [left, top, rear],      # Rear Top Left
+-                [left, bottom, rear],   # Rear Bottom Left
+-                [right, bottom, rear],  # Rear Bottom Right
+-                self.center_location,   # Center
++                        [right, top, rear],    # Front Top Right
++                        [right, top, front],     # Front Top Left
++                        [left, top, front],  # Front Bottom Left
++                        [left, top, rear], # Front Bottom Right
++                        [right, bottom, rear],     # Rear Top Right
++                        [right, bottom, front],      # Rear Top Left
++                        [left, bottom, front],   # Rear Bottom Left
++                        [left, bottom, rear],  # Rear Bottom Right  # Center
++                        self.center_location,
+             ]
+         else:
+             sx, sy, sz = self.size3d
+diff --git a/train2/inference.py b/train2/inference.py
+index a96f65d..f1e9d6d 100755
+--- a/train2/inference.py
++++ b/train2/inference.py
+@@ -211,7 +211,8 @@ class DopeNode(object):
+                 self.pnp_solvers[m],
+                 img,
+                 self.config_detect,
+-                make_belief_debug_img=True
++                grid_belief_debug=True
++                #make_belief_debug_img=True
+             )
+             # print(results)
+             # print('---')
+diff --git a/train2/train.py b/train2/train.py
+index bac1006..6ed28bb 100755
+--- a/train2/train.py
++++ b/train2/train.py
+@@ -137,7 +137,7 @@ parser.add_argument('--data1', default=None, help='path to dataset1')
+ parser.add_argument('--data2', default=None, help='path to dataset2')
+ parser.add_argument('--size1', default=None, help='size of dataset1 in percentage (0,1)')
+ parser.add_argument('--size2', default=None, help='size of dataset2 in percentage (0,1)')
+-parser.add_argument("--local_rank", type=int)
++parser.add_argument("--local-rank", type=int)
+ 
+ # Read the config but do not overwrite the args written 
+ args, remaining_argv = conf_parser.parse_known_args()
+@@ -615,9 +615,9 @@ for epoch in range(1, opt.epochs + 1):
+     try:
+         if opt.local_rank == 0:
+             if not opt.dontsave is True:
+-                torch.save(net.state_dict(), f'{opt.outf}/net_{opt.namefile}_{str(epoch).zfill(2)}.pth')
++                torch.save(net.module.state_dict(), f'{opt.outf}/net_{opt.namefile}_{str(epoch).zfill(2)}.pth')
+             else:
+-                torch.save(net.state_dict(), f'{opt.outf}/net_{opt.namefile}.pth')
++                torch.save(net.module.state_dict(), f'{opt.outf}/net_{opt.namefile}.pth')
+     except:
+         pass
+ 
+@@ -625,6 +625,6 @@ for epoch in range(1, opt.epochs + 1):
+         break
+ # print(best_results)
+ if opt.local_rank == 0:
+-    torch.save(net.state_dict(), f'{opt.outf}/net_{opt.namefile}_{str(epoch).zfill(2)}.pth')
++    torch.save(net.module.state_dict(), f'{opt.outf}/net_{opt.namefile}_{str(epoch).zfill(2)}.pth')
+ print ("end:" , datetime.datetime.now().time())
+ 

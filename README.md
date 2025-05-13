@@ -20,6 +20,14 @@ docker build -t nvidia-dope:noetic-v100 -f Dockerfile.noetic ..
 ```
 
 ### Training the model
+
+Apply some minor modifications to `Deep_Object_Pose` repo:
+```bash
+cd Deep_Object_Pose
+git apply ../diff.patch
+```
+
+
 From the project root (outside the Docker directory), run:
 
 ```bash
@@ -31,9 +39,9 @@ docker run --gpus all --rm -it \
   python3 -m torch.distributed.launch --nproc_per_node=1 train.py \
     --network dope \
     --epochs 100 \
-    --batchsize 1 \
+    --batchsize 2 \
     --outf /data/training_log/ \
-    --data /data/preprocessed
+    --data /data/preprocessed/
 ```
 
 If you want to check training process in tensorboard:
@@ -55,7 +63,7 @@ docker run --gpus all --rm -it \
   -v $(pwd)/config:/config \
   -w /dope/train2 \
   nvidia-dope:noetic-v100 \
-  python3 inference.py --config /config/config_inference/epos_config_low_res/config_pose.yaml --data /data/rgb
+  python3 inference.py --config /config/config_pose.yaml --data /data/preprocessed/000002  --outf /data/results --camera /config/camera_info.yaml
 ```
 
 ### Evaluation using bop toolkit

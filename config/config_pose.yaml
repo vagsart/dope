@@ -6,79 +6,46 @@ downscale_height: 480   # if the input image is larger than this, scale it down 
 
 # Comment any of these lines to prevent detection / pose estimation of that object
 weights: {
-    #"003_cracker_box_16k": "/root/catkin_ws/src/dope/weights/cracker_60.pth",
-    # "gelatin":"package://dope/weights/gelatin_60.pth",
-    # "meat":"package://dope/weights/meat_20.pth",
-    # "mustard":"package://dope/weights/mustard_60.pth",
-    # "soup":"package://dope/weights/soup_60.pth",
-    # 'peg_hole': "package://dope/weights/peg_box_40.pth",
-    # 'cube_red': "package://dope/weights/red_40.pth",
-    #"sugar":"package://dope/weights/sugar_60.pth"
-    # "bleach":"package://dope/weights/bleach_28_dr.pth"
-    # 'pudding':"weights_dope/pudding.pth"
-    # 'pudding':"weights_dope/dope_network/net_epoch_60.pth"
-    #'alphabet_soup':"weights_dope/resnet_simple/alphabe_soup.pth"
-    # "Mustard": "/root/catkin_ws/src/dope/weights/Mustard.pth",
-    #"010": "/root/catkin_ws/src/dope/weights/net_meat_shiny_14.pth",
-    "obj_3": "/root/catkin_ws/src/dope/scripts/train2/tmp/net_epoch_10.pth"
+    "obj_1": "/data/training_log/net_epoch_49.pth",
+    "obj_2": "/data/training_log/net_epoch_49.pth",
+    "obj_3": "/data/training_log/net_epoch_49.pth",
+    "obj_4": "/data/training_log/net_epoch_49.pth",
+    "obj_5": "/data/training_log/net_epoch_49.pth"    
 }
 
 # Type of neural network architecture
 architectures: {
-    'pudding':"dope",
-    'alphabet_soup':'resnet_simple',  
-    'Mustard': "dope",
-    "010": "dope",
-    "003_cracker_box_16k": "dope",
-    "obj_3": "dope"
+    "obj_1": "dope",
+    "obj_2": "dope",
+    "obj_3": "dope",
+    "obj_4": "dope",
+    "obj_5": "dope"
 }
 
 
 # Cuboid dimension in cm x,y,z
 dimensions: {
-    "003_cracker_box_16k": [16.403600692749023,21.343700408935547,7.179999828338623],
-    "gelatin": [8.918299674987793, 7.311500072479248, 2.9983000755310059],
-    "010": [10.164673805236816,8.3542995452880859,5.7600898742675781], # meat
-    "mustard": [9.6024150848388672,19.130100250244141,5.824894905090332],
-    "soup": [6.7659378051757813,10.185500144958496,6.771425724029541],
-    "sugar": [9.267730712890625,17.625339508056641,4.5134143829345703],
-    "bleach": [10.267730712890625,26.625339508056641,7.5134143829345703],
-    "peg_hole": [12.6,3.9,12.6],
-    'cube_red':[5,5,5],
-    'pudding':[49.47199821472168, 29.923000335693359, 83.498001098632812],
-    'alphabet_soup':[8.3555002212524414, 7.1121001243591309, 6.6055998802185059],
-    "Mustard" : [ 16.004999160766602, 4.8573999404907227, 6.5132999420166016 ], 
-    "obj_3": [9.778550720214844, 42.2700012207031255, 7.41875]
+    "obj_1": [15.899969482421875, 24.85395050048828, 7.419580078125],
+    "obj_2": [6.614794921875, 20.2759033203125, 6.6885009765625],
+    "obj_3": [9.778550720214844, 42.2700012207031255, 7.41875],
+    "obj_4": [6.580763, 11.633094, 7.075945],
+    "obj_5": [18.394457, 24.826819999999998, 2.7396]
 }
 
 class_ids: {
-    # "003_cracker_box_16k": 1,
-    # "gelatin": 2,
-    # "010":    3,
-    # "mustard": 4,
-    # "soup":    5,
-    # "sugar":   6,
-    # "bleach":  7,
-    # "peg_hole": 8,
-    # "cube_red": 9,
-    # 'pudding': 10,
-    # 'alphabet_soup': 12,
-    # "Mustard": 25, 
-    "obj_3": 3
+    "obj_1": 1,
+    "obj_2": 2,
+    "obj_3": 3,
+    "obj_4": 4,
+    "obj_5": 5
 }
 
 draw_colors: {
-    # "003_cracker_box_16k": [13, 255, 128],  # green
-    # "gelatin": [255, 255, 255],  # while
-    # "010": [0, 104, 255],  # blue
-    # "mustard": [217,12, 232],  # magenta
-    # "soup": [255, 101, 0],  # orange
-    # "sugar": [232, 222, 12],  # yellow
-    # "bleach": [232, 222, 12],  # yellow
-    # "peg_hole": [232, 222, 12],  # yellow
-    # "cube_red": [255,0,0],
-    # "pudding": [255,0,0],
-    "obj_3": [13, 255, 128]
+    "obj_1": [255, 0, 0],
+    "obj_2": [0, 255, 0],
+    "obj_3": [0, 0, 255],
+    "obj_4": [255, 255, 0],
+    "obj_5": [255, 0, 255],
 }
 
 # optional: provide a transform that is applied to the pose returned by DOPE
@@ -104,14 +71,11 @@ meshes: {
 
 # optional: If the specified meshes are not in meters, provide a scale here (e.g. if the mesh is in centimeters, scale should be 0.01). default scale: 1.0.
 mesh_scales: {
-    "003_cracker_box_16k": 0.01,
-    "gelatin": 0.01,
-    "010":    0.01,
-    "mustard": 0.01,
-    "soup":    0.01,
-    "sugar":   0.01,
-    "bleach":  0.01,
-    "obj_3": 0.001
+    "obj_1": 0.001,
+    "obj_2": 0.001,
+    "obj_3": 0.001,
+    "obj_4": 0.001,
+    "obj_5": 0.001
 }
 
 # Config params for DOPE
