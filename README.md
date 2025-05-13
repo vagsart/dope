@@ -3,8 +3,8 @@
 ### Preprocessing the data
 Run the following command locally (not inside Docker):
 ```bash
-DATASET_PATH=/home/vagsart/Datasets/IndustryShapes
-python3 preprocessing/convert_to_dope_dataset.py \
+DATASET_PATH=/home/vagsart/Desktop/IndustryShapesClassicv2
+python3 utils/prepare_dataset.py \
   --data_folder $DATASET_PATH/train_primesense/ \
   --output_folder data/preprocessed \
   --models_path $DATASET_PATH/models_eval \
@@ -67,3 +67,11 @@ docker run --gpus all --rm -it \
 ```
 
 ### Evaluation using bop toolkit
+
+
+```bash
+python utils/results_to_bop.py \
+  --root_folder /home/vagsart/code/dope_fork/scripts/train2/results/000001/ \
+  --outf results/ \
+  --modelpath /home/vagsart/Datasets/IndustryShapes/models_eval
+```
