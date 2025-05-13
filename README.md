@@ -73,4 +73,3 @@ python utils/results_to_bop.py \
 ```
 
 (Optional) If you want to visualize the results, add `--visualize` flag to the command above.
-```bash
